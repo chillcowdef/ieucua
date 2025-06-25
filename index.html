@@ -72,7 +72,13 @@
   </div>
 
   <!-- Nhạc nền ẩn -->
-  <iframe id="bg-music" width="0" height="0" src="https://www.youtube.com/watch?v=U1usrHw-GvI&list=RDU1usrHw-GvI&start_radio=1" frameborder="0" allow="autoplay"></iframe>
+ <iframe
+  width="0"
+  height="0"
+  src="https://www.youtube.com/embed/U1usrHw-GvI?autoplay=1&loop=1&playlist=U1usrHw-GvI"
+  frameborder="0"
+  allow="autoplay"
+></iframe>
 
   <script>
     const yesBtn = document.getElementById("yesBtn");
@@ -127,7 +133,7 @@
     let isMuted = false;
     musicControl.addEventListener("click", () => {
       isMuted = !isMuted;
-      bgMusic.src = isMuted ? "" : "https://www.youtube.com/watch?v=U1usrHw-GvI&list=RDU1usrHw-GvI&start_radio=1";
+      bgMusic.src = isMuted ? "" : "https://www.youtube.com/embed/U1usrHw-GvI?autoplay=1&loop=1&playlist=U1usrHw-GvI";
       musicControl.textContent = isMuted ? "🔈" : "🔊";
     });
   </script>
