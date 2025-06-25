@@ -104,6 +104,15 @@
       noBtn.style.position = "absolute";
       noBtn.style.top = `${y}%`;
       noBtn.style.left = `${x}%`;
+      noBtn.addEventListener("touchstart", () => {
+  noClickCount++;
+  yesBtn.style.transform = `scale(${1 + noClickCount * 0.2})`;
+
+  if (noClickCount >= 1 && noClickCount <= 5) {
+    img.src = `./img${noClickCount}.png`;
+  }
+});
+
     });
 
     noBtn.addEventListener("click", () => {
