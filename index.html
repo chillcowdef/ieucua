@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bạn có yêu mình không?</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin-top: 40px;
+      background-color: #fff0f5;
+    }
+    #question-img {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 20px 0;
+    }
+    #buttons {
+      margin-top: 30px;
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      cursor: pointer;
+    }
+    #yesBtn.glow {
+      background-color: #ff69b4;
+      color: white;
+      box-shadow: 0 0 20px #ff1493;
+    }
+    #result {
+      margin-top: 100px;
+      font-size: 24px;
+      color: #e91e63;
+      min-height: 30px;
+    }
+    #message-box {
+      margin-top: 20px;
+      display: none;
+    }
+    #music-control {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button id="music-control">🔊</button>
+  <img src="./img0.png" id="question-img" />
+  <h1>Bạn có yêu mình không?</h1>
+  <div id="buttons">
+    <button id="yesBtn">Có</button>
+    <button id="noBtn">Không</button>
+  </div>
+  <div id="result"></div>
+
+  <div id="message-box">
+    <p>Muốn nhắn gì với mình hong? 💌</p>
+    <input type="text" id="message-input" placeholder="..." />
+    <p id="message-display" style="margin-top: 10px; color: #333;"></p>
+  </div>
+
+  <!-- Nhạc nền ẩn -->
+  <iframe id="bg-music" width="0" height="0" src="https://www.youtube.com/embed/YDz9G8nR5Yo?autoplay=1&loop=1&playlist=YDz9G8nR5Yo" frameborder="0" allow="autoplay"></iframe>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const result = document.getElementById("result");
+    const img = document.getElementById("question-img");
+    const msgBox = document.getElementById("message-box");
+    const msgInput = document.getElementById("message-input");
+    const msgDisplay = document.getElementById("message-display");
+    const musicControl = document.getElementById("music-control");
+    const bgMusic = document.getElementById("bg-music");
+
+    let noClickCount = 0;
+
+    yesBtn.addEventListener("click", () => {
+      result.textContent = "Ỏ mình biết mà 🥰";
+      yesBtn.classList.add("glow");
+      img.src = "./img_done.png";
+      msgBox.style.display = "block";
+    });
+
+    msgInput.addEventListener("input", () => {
+      msgDisplay.textContent = msgInput.value;
+    });
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.floor(Math.random() * 80);
+      const y = Math.floor(Math.random() * 80);
+      noBtn.style.position = "absolute";
+      noBtn.style.top = `${y}%`;
+      noBtn.style.left = `${x}%`;
+    });
+
+    noBtn.addEventListener("click", () => {
+      noClickCount++;
+      yesBtn.style.transform = `scale(${1 + noClickCount * 0.2})`;
+
+      if (noClickCount >= 1 && noClickCount <= 5) {
+        img.src = `./img${noClickCount}.png`;
+      }
+    });
+
+    let isMuted = false;
+    musicControl.addEventListener("click", () => {
+      isMuted = !isMuted;
+      bgMusic.src = isMuted ? "" : "https://www.youtube.com/embed/YDz9G8nR5Yo?autoplay=1&loop=1&playlist=YDz9G8nR5Yo";
+      musicControl.textContent = isMuted ? "🔈" : "🔊";
+    });
+  </script>
+</body>
+</html>
